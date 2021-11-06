@@ -1,2 +1,2 @@
 # LiquidHacks2021
-LiquidHacks2021 Hackathon.
+LiquidHacks 2021 Hackathon project by Jack Dilkens and Rodrigo Lopez.
