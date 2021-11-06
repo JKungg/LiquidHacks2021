@@ -1,24 +1,46 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
 
-#div-top-bar {
+header {
+    background: skyblue;
+}
+
+nav {
+    margin-left: 40%;
+}
+
+#ul-bar {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: beige;
 }
 
 li {
-    float: left;
-}
-
-#ul-bar li {
     display: inline;
-    color: black;
-    text-align: center;
-    padding: 8px;
+    color: white;
+    text-align: center; 
+    padding-top: 10px;
+    margin-left: 60px;
     font-size: 30px;
     text-decoration: none;
 }
+
+li a:hover {
+    background-color: black;
+}
+
+li a:active {
+    background-color: cornflowerblue;
+}
+
+li a:visited {
+    color: white;
+}
+
+
 
 .diamond-heatmap {
     width: 450px;
@@ -35,9 +57,10 @@ li {
 .content {
     font-family: cursive;
     font-size: 25px;
+    width: 700px;
     background-color: beige ;
-    margin-top: 20%;
-    margin-right: 20%;
+    margin-top: 19%;
+    margin-left: 55%;
     text-align: right;
 }
 .content input {
