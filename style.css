@@ -1,14 +1,46 @@
 
-* {
-    background-color: black;
+#div-top-bar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: beige;
 }
 
-div {
-
-    color: royalblue;
+li {
+    float: left;
 }
 
-img {
-    width: 75px;
-    height: auto;
+#ul-bar li {
+    display: inline;
+    color: black;
+    text-align: center;
+    padding: 8px;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.diamond-heatmap {
+    width: 450px;
+    height: 450px;
+    background: linear-gradient(to left, blue, orange);
+    top: 35%;
+    left: 25%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+
+.content {
+    font-family: cursive;
+    font-size: 25px;
+    background-color: beige ;
+    margin-top: 20%;
+    margin-right: 20%;
+    text-align: right;
+}
+.content input {
+    font-family: cursive;
+    font-size: 20px;
 }
