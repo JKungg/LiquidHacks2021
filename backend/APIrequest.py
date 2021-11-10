@@ -1,9 +1,13 @@
 import json
 import requests
 from time import sleep
+import goalHeatmap
 
 response = requests.get("http://127.0.0.1:6721/session")
 jsonData = response.json()
+
+
+discPos = {'X' : None, 'Y' : None} # Initialize Dict
 
 
 def getUserInfo(d):
@@ -26,42 +30,53 @@ def getUserInfo(d):
         orangeNames[f"player{x}"] = oName
 
 
-    # If Game Status is 'Score' Proceed with Disc Location Updates
-    while True:
-        r = requests.get("http://127.0.0.1:6721/session")
-        rdata = r.json()
-        gameStatus = rdata['game_status']
-
-        # If score, get data
-        if gameStatus == 'score':
-            lastScore = rdata['last_score']['disc_speed']
-            sleep(12)
-        
-        # If post/pre match pause sleep.
-        elif gameStatus == 'post_match' or 'pre_match':
-            print("Current in post/pre match please wait!")
-            sleep(15)
-
-        # Continue repeating until score.
-        elif gameStatus == 'playing':
-            sleep(12)
-        else:
-            print("error encountered")
-            break
-
-
-
     blueStats = {
         "players" : blueNames
     }
     orangeStats = {
         "players" : orangeNames
     }
-    gameStats = {
-        "last_score" : lastScore
-    }
-    return blueStats, orangeStats, gameStats
+    return blueStats, orangeStats
+
+
+def getDiscPos(rdata):
+    # Get Disc Position from API
+    discPos0 = rdata['disc']['position'][0] # x POS
+    discPos1 = rdata['disc']['position'][1] # y POS
+    goalHeatmap.saveGoalPos()
+    return discPos0, discPos1
+
+
+def getScoreData():
+    # If Game Status is 'Score' Proceed with Disc Location Updates
+    while True:
+        r = requests.get("http://127.0.0.1:6721/session")
+        rdata = r.json()
+        gameStatus = rdata['game_status']
+        # print(gameStatus)
+
+        # If score, get data
+        if gameStatus == 'score':
+            lastScore = rdata['last_score']['disc_speed']
+            getDiscPos(rdata)
+            sleep(18)
+        
+        # If post/pre match pause sleep.
+        elif gameStatus == 'post_match' or gameStatus == 'pre_match':
+            sleep(12)
+            continue
+
+        # Continue repeating until score.
+        elif gameStatus == 'playing' or gameStatus == 'round_start':
+            sleep(5)
+            continue
+        # elif gameStatus == ''
+        else:
+            print("error encountered")
+            break
+    return rdata, lastScore
 
 
 
-getUserInfo(jsonData)
+# getUserInfo(jsonData)
+getScoreData()
